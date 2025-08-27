@@ -11,7 +11,7 @@ Falso. Tiene los atributos correspondientes pero la clave no está bien definida
 
 C. La relación dicta tiene los atributos correspondientes y su clave está bien definida
 
-Verdadero. Cuando la cardinalidad es (1,N) - (1,1) la clave de la relacion es el identificador de la entidad que puede estar repetida n veces.
+Verdadero.
 
 D. La relación tiene no debería existir y los identificadores de la agregación deberían estar
 en InfoCurso.
@@ -20,5 +20,6 @@ Falso. Los identificadores de la agregación deberían estar en la agregación.
 
 E. La relación dicta no debería existir y los atributos de Profesor deberían estar en
 InfoCurso.
+
 
 Falso. Los atributos de Profesor deberían estar en Profesor.
