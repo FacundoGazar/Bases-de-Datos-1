@@ -1,0 +1,22 @@
+
+# Dada la transformación 1 a 1 del modelo de entidades y relaciones al modelo relacional, responda si las siguientes afirmaciones son V o F:
+
+## A. La relación brinda tiene los atributos correspondientes y su clave está bien definida
+
+Verdadero. Cuando la cardinalidad es (1,n) - (1,n) la relacion tiene que tener como clave los identificadores de las entidades.
+
+## B. La relación tiene tiene los atributos correspondientes y su clave está bien definida
+
+Falso. Tiene los atributos correspondientes pero la clave no está bien definida. Cuando la cardinalidad es (1,1) - (1,1) la clave de la relación es un identificador de cualquiera de las entidades.
+
+## C. La relación dicta tiene los atributos correspondientes y su clave está bien definida
+
+Verdadero.
+
+## D. La relación tiene no debería existir y los identificadores de la agregación deberían estar en InfoCurso.
+
+Falso. Los identificadores de la agregación deberían estar en la agregación.
+
+## E. La relación dicta no debería existir y los atributos de Profesor deberían estar en InfoCurso.
+
+Falso. Los atributos de Profesor deberían estar en Profesor.

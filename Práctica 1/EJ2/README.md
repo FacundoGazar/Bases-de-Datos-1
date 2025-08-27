@@ -1,0 +1,15 @@
+## A. En una especialización, la entidad padre no representa datos que realmente existan, sino que sirve para representar los aspectos comunes de las entidades hijas.
+
+Falso. En una especialización puede darse el caso de que querramos representar solamente a la entidad padre, como es el caso de Empleado -> (E) Administrativo. Va a haber algunos casos donde tenemos un empleado que no es administrativo.
+
+## B. En una agregación, la cardinalidad mínima debe ser mayor a 0
+
+Falso. No hay una cardinalidad mínima obligatoria, puede ser 0.
+
+## C. Una entidad puede no tener un atributo identificador en el modelo ER
+
+Falso. Una de las restricciones del modelo ER es que todas las entidades necesitan por lo menos un identificador.
+
+## D. No es correcto modelar atributos en las relaciones en un modelo ER
+
+Falso. Los atributos se pueden modelar en las relaciones como en las entidades.

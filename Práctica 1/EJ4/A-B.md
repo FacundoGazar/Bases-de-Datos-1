@@ -1,0 +1,7 @@
+## A. En qué casos modelaría un atributo fecha_de_ingreso en la relación se_emplea –entre Vendedor y Local - como se muestra en la variante “A”?
+
+Modelaria el atributo fecha_de_ingreso en la relación se_emplea si quiero saber la fecha de ingreso del vendedor al local.
+
+## B. ¿En qué casos haría falta modelar una entidad Fecha de Ingreso relacionada con la agregación Vendedor Local como se muestra en la parte llamada B en el modelo?
+
+Haría falta en los casos donde un vendedor pueda tener varias fechas de ingreso, esto sucedería en caso de ser despedido y contratado nuevamente.
