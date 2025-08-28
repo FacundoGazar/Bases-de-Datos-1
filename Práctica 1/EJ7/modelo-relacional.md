@@ -1,4 +1,4 @@
-\# Transformación 1 a 1 del modelo de entidades y relaciones al modelo relacional
+# Transformación 1 a 1 del modelo de entidades y relaciones al modelo relacional
 
 
 
@@ -39,4 +39,5 @@ obtiene(\*\*email\*\*, \*\*id\_logro\*\*)
 
 
 sucede(\*\*id\_fecha\*\*, \*\*email\*\*, \*\*id\_logro\*\*)
+
 
