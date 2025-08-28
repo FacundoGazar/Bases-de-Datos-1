@@ -2,42 +2,43 @@
 
 
 
-user(\*\*email\*\*, nombre, peso, altura)
+user(**email**, nombre, peso, altura)
 
 
 
-entrenamiento(\*\*id\_entrenamiento\*\*, calorias, tiempo)
+entrenamiento(**id_entrenamiento**, calorias, tiempo)
 
 
 
-correr(\*\*id\_entrenamiento\*\*, velocidad)
+correr(**id_entrenamiento**, velocidad)
 
 
 
-objetivo(\*\*id\_objetivo\*\*, objetivo\_tiempo, porcentaje\_obtenido)
+objetivo(**id_objetivo**, objetivo_tiempo, porcentaje_obtenido)
 
 
 
-logro(\*\*id\_logro\*\*, nombre, desc)
+logro(**id_logro**, nombre, desc)
 
 
 
-fecha(\*\*id\_fecha\*\*, fecha)
+fecha(**id_fecha**, fecha)
 
 
 
-realiza(\*\*email\*\*, \*\*id\_entrenamiento\*\*)
+realiza(**email**, **id_entrenamiento**)
 
 
 
-tiene(\*\*id\_entrenamiento\*\*, id\_objetivo)
+tiene(**id_entrenamiento**, id_objetivo)
 
 
 
-obtiene(\*\*email\*\*, \*\*id\_logro\*\*)
+obtiene(**email**, **id_logro**)
 
 
 
 sucede(\*\*id\_fecha\*\*, \*\*email\*\*, \*\*id\_logro\*\*)
+
 
 
