@@ -18,4 +18,6 @@ mide(**id_monitoreo**, **valor_referencia**)
 
 obtiene(**id_resultado**,  id_monitoreo, valor_referencia)
 
-utiliza(**id_resultado**, numero_serie)
+
+utilizaDigital(**id_resultado**, numero_serie)
+utilizaAnalogico(**id_resultado**, numero_serie)
