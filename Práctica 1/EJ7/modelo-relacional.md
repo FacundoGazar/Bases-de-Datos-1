@@ -38,7 +38,8 @@ obtiene(**email**, **id_logro**)
 
 
 
-sucede(\*\*id\_fecha\*\*, \*\*email\*\*, \*\*id\_logro\*\*)
+sucede(**id_fecha**, **email**, **id_logro**)
+
 
 
 
