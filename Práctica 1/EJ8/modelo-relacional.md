@@ -30,7 +30,7 @@ responsable(**id_dpto**, legajo)
 
 
 
-especializa(**id_mueble**, id_dpto, legajo)
+especializa(**id_mueble**, id_dpto)
 
 
 
@@ -39,3 +39,4 @@ compone(**id_mueble**,**id_material**, cantidad)
 
 
 realiza(**id_turno**,**legajo**,**id_dpto**)
+
