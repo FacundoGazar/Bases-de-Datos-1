@@ -1,0 +1,216 @@
+DF1: #medicion -> #pozo, cuil_operario, fecha_medicion
+DF2: #pozo -> descripcion_pozo, fecha_perforacion
+DF3: cuil_operario -> nombre_operario, apellido_operario, fecha_nacimiento
+DF4: #parametro -> nombre_parametro, valor_ref
+DF5: #medicion, #parametro -> valor_medicion
+DF6: #instrumento -> marca_instrumento, modelo_instrumento
+DF7: dominio_vehiculo -> fecha_adquisicion
+
+CC = {#medicion, #parametro, #instrumento, dominio_vehiculo}
+
+Está en BCNF?
+
+No porque la dependencia funcional 5 existe y 
+	no es superclave del esquema: {#medicion, #parametro}.
+
+Particionamos por la df5 y creamos estas nuevas relaciones:
+
+MA1 (#medicion, #parametro, valor_medicion)
+MA2 (#medicion, #pozo, #parametro, fecha_medicion, cuil_operario, 
+	#instrumento, nombre_parametro, valor_ref, descripcion_pozo, fecha_perforacion, 
+	apellido_operario, nombre_operario, fecha_nacimiento, marca_instrumento, 
+	modelo_instrumento, dominio_vehiculo, fecha_adquisicion)
+
+Se pierde información?
+
+No porque MA1 & MA2 es clave en el esquema MA1 {#medicion, #parametro}.
+
+Se perdieron DF?
+
+De manera simple podemos ver que en MA1 vale la DF5 y 
+	en MA2 valen DF1, DF2, DF3, DF4, DF6, DF7.
+
+En que forma normal están?
+
+MA1 está en BCNF por definicion.
+MA2 no está en BCNF porque existe la dependencia funcional 6 cuyo determinante no es 
+						superclave del esquema {#instrumento}.
+
+Particionamos a partir de la DF6:
+
+MA3 (#instrumento, marca_instrumento, modelo_instrumento)
+MA4 (#medicion, #pozo, #parametro, fecha_medicion, cuil_operario, 
+	#instrumento, nombre_parametro, valor_ref, descripcion_pozo, fecha_perforacion, 
+	apellido_operario, nombre_operario, fecha_nacimiento,
+	dominio_vehiculo, fecha_adquisicion)
+
+Se perdió información?
+
+No porque MA3 & MA4 es clave en el esquema MA3 {#instrumento}.
+
+Se perdieron DF?
+
+De manera simple podemos ver que en MA3 vale DF6
+	y en MA4 valen DF1, DF2, DF3, DF4, DF7.
+
+En que forma normal están?
+
+MA3 está en BCNF por definición.
+MA4 no está en BCNF porque existe la dependencia funcional 4 
+	cuyo determinante no es superclave del esquema {#parametro}.
+
+Particionamos a partir de la DF4:
+
+MA5 (#parametro, nombre_parametro, valor_ref)
+MA6 (#medicion, #pozo, #parametro, fecha_medicion, cuil_operario, 
+	#instrumento, descripcion_pozo, fecha_perforacion, 
+	apellido_operario, nombre_operario, fecha_nacimiento,
+	dominio_vehiculo, fecha_adquisicion)
+
+Se perdió información?
+
+No porque MA5 & MA6 es clave en el esquema MA5 {#parametro}.
+
+Se perdieron DF?
+
+De manera simple podemos ver que en MA5 vale DF4
+	y en MA6 valen DF1, DF2, DF3, DF7.
+
+En que forma normal están?
+
+MA5 está en BCNF por definición.
+MA6 no está en BCNF porque existe la dependencia funcional 7 
+	cuyo determinante no es superclave del esquema {dominio_vehiculo}.
+
+Particionamos a partir de la DF4:
+
+MA7 (dominio_vehiculo, fecha_adquisicion)
+MA8 (#medicion, #pozo, #parametro, fecha_medicion, cuil_operario, 
+	#instrumento, descripcion_pozo, fecha_perforacion, 
+	apellido_operario, nombre_operario, fecha_nacimiento,
+	dominio_vehiculo)
+
+Se perdió información?
+
+No porque MA7 & MA8 es clave en el esquema MA7 {dominio_vehiculo}
+
+Se perdieron DF?
+
+De manera simple podemos ver que en MA7 vale DF7
+	y en MA8 valen DF1, DF2, DF3.
+
+En que forma normal están?
+
+MA7 está en BCNF por definición.
+MA8 no está en BCNF porque existe la dependencia funcional 3 
+	cuyo determinate no es superclave del esquema {cuil_operario}.
+
+Particionamos a partir de la DF3:
+
+MA9 (cuil_operario, nombre_operario, fecha_nacimiento, apellido_operario).
+MA10 (#medicion, #pozo, #parametro, fecha_medicion, cuil_operario, 
+	#instrumento, descripcion_pozo, fecha_perforacion, dominio_vehiculo).
+
+Se perdió información?
+
+No porque MA9 & MA10 es clave en el esquema MA9 {cuil_operario}.
+
+Se perdieron DF?
+
+De manera simple podemos ver que en MA9 vale DF3
+	y en MA10 valen DF1, DF2.
+
+En que forma normal están?
+
+MA9 está en BCNF por definición.
+MA10 no está en BCNF porque existe la dependencia funcional 2 
+	cuyo determinate no es superclave del esquema {#pozo}.
+
+Particionamos a partir de la DF2:
+
+MA11 (#pozo, descripcion_pozo, fecha_perforacion)
+MA12 (#medicion, #pozo, #parametro, fecha_medicion, cuil_operario, 
+	#instrumento, dominio_vehiculo)
+
+Se perdió información?
+
+No porque MA11 & MA12 es clave en el esquema MA11 {#pozo}.
+
+Se perdieron DF?
+
+De manera simple podemos ver que en MA11 vale DF2
+	y en MA12 vale DF1.
+
+En que forma normal están?
+
+MA11 está en BCNF por definición.
+MA12 no está en BCNF porque existe la dependencia funcional 1 
+	cuyo determinate no es superclave del esquema {#medicion}.
+
+Particionamos a partir de la DF1:
+
+MA13 (#medicion, #pozo, cuil_operario, fecha_medicion).
+MA14 (#medicion, #parametro, #instrumento, dominio_vehiculo).
+
+Se perdió información?
+
+No porque MA13 & MA14 es clave en el esquema MA13 {#medicion}.
+
+Se perdieron DF?
+
+De manera simple podemos ver que en MA13 vale DF1.
+
+En que forma normal están?
+
+MA13 está en BCNF por definición.
+MA14 está en BCNF por definición.
+
+Las particiones de MEDICION_AMBIENTAL, que quedaron en BCNF, son:
+
+MA1 (#medicion, #parametro, valor_medicion)
+MA3 (#instrumento, marca_instrumento, modelo_instrumento)
+MA5 (#parametro, nombre_parametro, valor_ref)
+MA7 (dominio_vehiculo, fecha_adquisicion)
+MA9 (cuil_operario, nombre_operario, fecha_nacimiento, apellido_operario)
+MA11 (#pozo, descripcion_pozo, fecha_perforacion)
+MA13 (#medicion, #pozo, cuil_operario, fecha_medicion)
+MA14 (#medicion, #parametro, #instrumento, dominio_vehiculo)
+
+CP= {#medicion, #parametro, #instrumento, dominio_vehiculo}
+
+Dependencias multivaluadas que valen en MA14:
+
+DM1: #medicion ->> #parametro
+DM2: #medicion ->> #instrumento
+DM3: {} ->> dominio_vehiculo
+
+MA14 no está en 4FN porque existe la dependencia multivaluada 3 que no es trivial.
+
+Particionamos a partir de DM3:
+
+MA15 (dominio_vehiculo)
+MA16 (#medicion, #parametro, #instrumento)
+
+MA15 está en 4FN porque no valen DMs que no sean triviales en ella.
+MA16 no está en 4FN porque existe la dependencia multivaluada 1 que no es trivial.
+
+Particionamos a partir de DM1:
+
+MA17 (#medicion, parametro)
+MA18 (#medicion, #instrumento)
+
+MA17 está en 4FN porque no valen DMs que no sean triviales en ella.
+MA18 está en 4FN porque no valen DMs que no sean triviales en ella.
+
+Esquemas en 4FN:
+
+MA1 (#medicion, #parametro, valor_medicion)
+MA3 (#instrumento, marca_instrumento, modelo_instrumento)
+MA5 (#parametro, nombre_parametro, valor_ref)
+MA7 (dominio_vehiculo, fecha_adquisicion)
+MA9 (cuil_operario, nombre_operario, fecha_nacimiento, apellido_operario)
+MA11 (#pozo, descripcion_pozo, fecha_perforacion)
+MA13 (#medicion, #pozo, cuil_operario, fecha_medicion)
+MA15 (dominio_vehiculo)
+MA17 (#medicion, parametro)
+MA18 (#medicion, #instrumento)
