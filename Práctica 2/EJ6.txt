@@ -1,0 +1,174 @@
+DEPENDENCIAS MULTIVALUADAS:
+
+DF1: #suscripcion -> email, #plan
+DF2: #plan -> nombre_plan, texto_condiciones, precio
+DF3: #contenido -> titulo, sinopsis, duracion
+DF4: email -> nombre_usuario
+DF5: email_adicional -> nombre_adicional
+DF6: #suscripcion, email_adicional -> fecha_adicional
+
+CC: {#suscripcion, email_adicional, #contenido}
+
+SUSCRIPCION cumple con  la definición de BCNF?
+
+No porque existe la dependencia funcional 3 cuyo 
+	determinante no es superclave del esquema {#contenido}
+
+Por lo tanto, particionamos por la DF3, creando dos nuevas relaciones:
+
+S1: (#contenido, titulo, sinopsis, duracion)
+S2: (#suscripcion, email, nombre_usuario, #plan, nombre_plan, texto_condiciones,
+	precio, email_adicional, nombre_adicional, #contenido, fecha_adicional)
+
+Se perdió información?
+
+No se perdió información porque S1 & S2 es {#contenido}, clave de S1
+
+Se perdieron DFs?
+
+Por validación simple DF3 vale en S1 y
+	DF1 DF2 DF4 DF5 DF6 vale en S2
+
+En qué forma normal se encuentran?
+
+S1 se encuentra en BCNF por definición
+S2 no se encuentra en BCFN porque existe DF4 cuyo determinante
+	no es superclave del esquema {email}
+
+Por lo tanto, particionamos por la DF4, creando dos nuevas relaciones:
+
+S3: (email, nombre_usuario)
+S4: (#suscripcion, email, #plan, nombre_plan, texto_condiciones,
+	precio, email_adicional, nombre_adicional, #contenido, fecha_adicional)
+
+Se perdió información?
+
+No se perdió información porque S3 & S4 es {email}, clave de S3
+
+Se perdieron DFs?
+
+Por validación simple DF4 vale en S3 y
+	DF1 DF2 DF5 DF6 vale en S4
+
+En qué forma normal se encuentran?
+
+S3 se encuentra en BCNF por definición
+S4 no se encuentra en BCFN porque existe DF5 cuyo determinante
+	no es superclave del esquema {email_adicional}
+
+Por lo tanto, particionamos por la DF5, creando dos nuevas relaciones:
+
+S5: (email_adicional, nombre_adicional)
+S6: (#suscripcion, email, #plan, nombre_plan, texto_condiciones,
+	precio, email_adicional, #contenido, fecha_adicional)
+
+Se perdió información?
+
+No se perdió información porque S5 & S6 es {email_adicional}, clave de S5
+
+Se perdieron DFs?
+
+Por validación simple DF5 vale en S5 y
+	DF1 DF2 DF6 vale en S6
+
+En qué forma normal se encuentran?
+
+S5 se encuentra en BCNF por definición
+S6 no se encuentra en BCFN porque existe DF6 cuyo determinante
+	no es superclave del esquema {#suscripcion, email_adicional}
+
+Por lo tanto, particionamos por la DF6, creando dos nuevas relaciones:
+
+S7: (#suscripcion, email_adicional, fecha_adicional)
+S8: (#suscripcion, email, #plan, nombre_plan, texto_condiciones,
+	precio, email_adicional, #contenido)
+
+Se perdió información?
+
+No se perdió información porque S7 & S8 es {#suscripcion, email_adicional}, clave de S7
+
+Se perdieron DFs?
+
+Por validación simple DF5 vale en S7 y
+	DF1 DF2 vale en S8
+
+En qué forma normal se encuentran?
+
+S7 se encuentra en BCNF por definición
+S8 no se encuentra en BCFN porque existe DF2 cuyo determinante
+	no es superclave del esquema {#plan}
+
+Por lo tanto, particionamos por la DF2, creando dos nuevas relaciones:
+
+S9: (#plan, nombre_plan, texto_condiciones, precio)
+S10: (#suscripcion, email, #plan, nombre_plan, email_adicional, #contenido)
+
+Se perdió información?
+
+No se perdió información porque S9 & S10 es {#plan}, clave de S7
+
+Se perdieron DFs?
+
+Por validación simple DF2 vale en S9 y
+	DF1 vale en S10
+
+En qué forma normal se encuentran?
+
+S9 se encuentra en BCNF por definición
+S10 no se encuentra en BCFN porque existe DF1 cuyo determinante
+	no es superclave del esquema {#suscipcion}
+
+Por lo tanto, particionamos por la DF1, creando dos nuevas relaciones:
+
+S11: (#suscripcion, email, #plan)
+S12: (#suscripcion, email_adicional, #contenido)
+
+Se perdió información?
+
+No se perdió información porque S11 & S12 es {#suscripcion}, clave de S11
+
+Se perdieron DFs?
+
+Por validación simple DF1 vale en S11 y 
+	S12 solo tiene los atributos que conforman la clave
+
+En qué forma normal se encuentran?
+
+S11 se encuentra en BCNF por definición
+S12 se encuentra en BCNF por deficinión
+
+Particiones en BCNF
+
+S1: (#contenido, titulo, sinopsis, duracion)
+S3: (email, nombre_usuario)
+S5: (email_adicional, nombre_adicional)
+S7: (#suscripcion, email_adicional, fecha_adicional)
+S9: (#plan, nombre_plan, texto_condiciones, precio)
+S11: (#suscripcion, email, #plan)
+S12: (#suscripcion, email_adicional, #contenido)
+
+CP: (#suscripcion, email_adicional, #contenido)
+
+DEPENDENCIAS MULTIVALUADAS:
+
+DM1: #suscripcion ->> #contenido
+DM2: #suscripcion ->> email_adicional
+
+Teniendo en cuenta DM1:
+
+S13: (#suscripcion, #contenido)
+S14: (#suscripcion, email_adicional)
+
+S13 está en 4FN por definición
+S14 está en 4FN por definición
+
+Esquemas resultantes en 4FN:
+
+S1: (#contenido, titulo, sinopsis, duracion)
+S3: (email, nombre_usuario)
+S5: (email_adicional, nombre_adicional)
+S7: (#suscripcion, email_adicional, fecha_adicional)
+S9: (#plan, nombre_plan, texto_condiciones, precio)
+S11: (#suscripcion, email, #plan)
+S13: (#suscripcion, #contenido)
+S14: (#suscripcion, email_adicional)
