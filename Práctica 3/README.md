@@ -41,3 +41,48 @@ c) **INSCRIPCIONAMATERIA** % π codigoDeMateria (**MATERIA**)
 a) **CURSO_REALIZADO** % (π #curso (**CURSO_EXIGIDO**))
 
 b) π #empleado (**LUGAR_TRABAJO**) - π #empleado (π #empleado, #curso (**LUGAR_TRABAJO** |X| **CURSO_EXIGIDO**) - **CURSO_REALIZADO**)
+
+### 9) Fabricantes de Muebles
+
+- TIPOMUEBLE ( **id_tipomueble**, descripción )
+- FABRICANTE ( **id_fabricante**, nombrefabricante, cuit )
+- TIPOMADERA ( **id_tipomadera**, nombremadera )
+- AMBIENTE ( **id_ambiente**, descripcionambiente )
+- MUEBLE ( **id_mueble**, id_tipomueble, id_fabricante, id_tipomadera, precio, dimensiones, descripcion )
+- MUEBLEAMBIENTE ( **id_mueble**, **id_ambiente** )
+
+1. Obtener los nombres de los fabricantes que fabrican muebles en todos los tipos de madera.
+2. Obtener los nombres de los fabricantes que sólo fabrican muebles en Pino.
+3. Obtener los nombres de los fabricantes que fabrican muebles para todos los ambientes.
+4. Obtener los nombres de los fabricantes que sólo fabrican muebles para oficina.
+5. Obtener los nombres de los fabricantes que sólo fabrican muebles para baño y cocina.
+6. Obtener los nombres de los fabricantes que producen muebles de cedro y roble.
+7. Obtener los nombres de los fabricantes que producen muebles de melamina o MDF
+
+a) Obtener los nombres de los fabricantes que fabrican muebles en todos los tipos de madera.
+
+ 1. **AUX** <- π id_fabricante, id_tipomadera (**FABRICANTE** |X| **MUEBLE**) % π id_tipomadera (**TIPOMADERA**)
+ 2.  π nombrefabricante (**AUX** |X| **FABRICANTE**)
+
+b) Obtener los nombres de los fabricantes que sólo fabrican muebles en Pino. **REHACER**
+
+ 1. **AUX** <- π id_fabricante (**FABRICANTE** |X| σ nombremadera <> 'Pino'
+    (**MUEBLE**))
+2. π nombrefabricante (**FABRICANTE** |X| (π id_fabricante (**FABRICANTE**) - **AUX**))
+
+c) Obtener los nombres de los fabricantes que fabrican muebles para todos los ambientes.
+
+1. **AUX** <- π id_fabricante, id_ambiente (**FABRICANTE** |X| **MUEBLE** |X| **MUEBLEAMBIENTE**) % π id_ambiente (**AMBIENTE**)
+2. π nombrefabricante (**AUX** |X| **FABRICANTE**)
+
+d) Obtener los nombres de los fabricantes que sólo fabrican muebles para oficina.
+
+ 1. **AUX** <- **MUEBLEAMBIENTE** |X| π id_ambiente (σ descripcionambiente <> 'Oficina'(**AMBIENTE**))
+ 2. π nombrefabricante (**FABRICANTE** |X| (π id_fabricante (**FABRICANTE**) - π id_fabricante (**FABRICANTE** |X| **MUEBLE** |X| **AUX**)))
+
+e) Obtener los nombres de los fabricantes que sólo fabrican muebles para baño y cocina.
+
+ 1. **AUX** <- **MUEBLEAMBIENTE** |X| π id_ambiente (σ descripcionambiente <> 'Baño' AND descripcionambiente <> 'Cocina'(**AMBIENTE**))
+ 2. π nombrefabricante (**FABRICANTE** |X| (π id_fabricante (**FABRICANTE**) - π id_fabricante (**FABRICANTE** |X| **MUEBLE** |X| **AUX**)))
+
+f) Obtener los nombres de los fabricantes que producen muebles de cedro y roble.
