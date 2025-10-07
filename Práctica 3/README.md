@@ -86,3 +86,11 @@ e) Obtener los nombres de los fabricantes que sólo fabrican muebles para baño 
  2. π nombrefabricante (**FABRICANTE** |X| (π id_fabricante (**FABRICANTE**) - π id_fabricante (**FABRICANTE** |X| **MUEBLE** |X| **AUX**)))
 
 f) Obtener los nombres de los fabricantes que producen muebles de cedro y roble.
+
+1. **AUX** <- (π id_fabricante, id_tipomadera (**FABRICANTE** |X| **MUEBLE**)) % π id_tipomadera (σ nombremadera = 'Roble' OR nombremadera = 'Cedro' (**TIPOMADERA**))
+2. π nombrefabricante (**AUX** |X| **FABRICANTE**)
+
+g) Obtener los nombres de los fabricantes que producen muebles de melamina o MDF
+
+1. **AUX** <- (π id_fabricante, id_tipomueble(**FABRICANTE** |X| **MUEBLE**)) |X| π id_tipomueble (σ descripcion = 'Melamina' OR descripcion = 'MDF' (**TIPOMUEBLE**)
+2. π nombrefabricante (**AUX** |X| **FABRICANTE**)
