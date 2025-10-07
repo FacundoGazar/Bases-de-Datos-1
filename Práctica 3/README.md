@@ -66,9 +66,9 @@ a) Obtener los nombres de los fabricantes que fabrican muebles en todos los tipo
 
 b) Obtener los nombres de los fabricantes que sólo fabrican muebles en Pino. **REHACER**
 
- 1. **AUX** <- π id_fabricante (**FABRICANTE** |X| σ nombremadera <> 'Pino'
-    (**MUEBLE**))
-2. π nombrefabricante (**FABRICANTE** |X| (π id_fabricante (**FABRICANTE**) - **AUX**))
+1. AUX <- π id_tipomadera (σ nombremadera <> 'Pino' (TIPOMADERA))
+ 2. AUX_DOS <- π id_fabricante (FABRICANTE |X| MUEBLE |X| AUX)
+3. π nombrefabricante (**FABRICANTE** |X| **AUX_DOS**)
 
 c) Obtener los nombres de los fabricantes que fabrican muebles para todos los ambientes.
 
